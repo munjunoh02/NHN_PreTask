@@ -98,5 +98,15 @@
 	</div>
 	
 	
+	<c:forEach var="book" items="${books}">
+	<tr align="center">
+		<td>${book.email}</td>
+		<td>${book.password}</td>
+		<td>${book.content}</td>
+		<td>${book.date}</td>
+	</tr>
+	</c:forEach>
+	
+	
 </body>
 </html>
