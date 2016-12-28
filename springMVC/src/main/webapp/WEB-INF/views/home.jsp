@@ -93,19 +93,19 @@
 	</div>
 	<hr>
 	<div id="commentdiv">
-	
-	
+
+		<c:forEach var="book" items="${books}">
+			<p>email : ${book.email}</p>
+			<p>password : ${book.password}</p>
+			<p>content : ${book.content}</p>
+			<p>date : ${book.date}</p>
+		</c:forEach>
+		
 	</div>
 	
+	<p>${serverTime}</p>
 	
-	<c:forEach var="book" items="${books}">
-	<tr align="center">
-		<td>${book.email}</td>
-		<td>${book.password}</td>
-		<td>${book.content}</td>
-		<td>${book.date}</td>
-	</tr>
-	</c:forEach>
+	
 	
 	
 </body>
