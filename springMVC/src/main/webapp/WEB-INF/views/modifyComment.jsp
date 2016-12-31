@@ -34,7 +34,7 @@
 	</style>
 	
 </head>
-		
+	
 <body>
 	<h1>
 		NHN_PreTask 문준오 - 수정
@@ -61,9 +61,11 @@
 
 			<div class="form-group">
 				<button type="submit" class="btn btn-default">수정</button>
+				<button class="btn btn-default" onclick="history.back();">뒤로가기</button>
 			</div>
 		</c:forEach>
 	</form>
+			
 	<hr>
 	
 </body>

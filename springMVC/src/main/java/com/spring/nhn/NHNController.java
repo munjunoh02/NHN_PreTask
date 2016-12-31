@@ -1,5 +1,6 @@
 package com.spring.nhn;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -49,7 +50,7 @@ public class NHNController {
 		String password = request.getParameter("password");
 		String content = request.getParameter("content");
 
-		boolean check_ok = check(email, password);
+		boolean check_ok = check_regex(email, password);
 		if(check_ok){
 			NHNModel comment = new NHNModel(email, password, content);
 			this._nhnService.insertData(comment);	
@@ -77,8 +78,17 @@ public class NHNController {
 		String password = request.getParameter("password");
 		String content = request.getParameter("content");
 		
-		boolean check_ok = check(email, password);
-		if(check_ok){
+		
+		List<NHNModel> nthData = this._nhnService.getNthData(index);
+		String originPassword = nthData.get(0).getPassword();
+		boolean pass_equal = originPassword.equals(password);
+		
+		if(!pass_equal){
+			return "notequal";
+		}
+		
+		boolean regex_ok = check_regex(email, password);
+		if(regex_ok){
 			NHNModel comment = new NHNModel(email, password, content);
 			this._nhnService.deleteData(index);
 			this._nhnService.insertData(comment);
@@ -88,7 +98,7 @@ public class NHNController {
 		return "goHome";
 	}
 	
-	private boolean check(String email, String password) {
+	private boolean check_regex(String email, String password) {
 		Pattern emailPattern = Pattern.compile("[0-9a-zA-Z][0-9a-zA-Z]*@[0-9a-zA-Z][0-9a-zA-Z]*.[a-zA-Z]{2,3}");
 		Pattern passwordPattern = Pattern.compile("[0-9a-zA-Z]{6}[0-9a-zA-Z]*");
 		Matcher emailMatcher = emailPattern.matcher(email);
